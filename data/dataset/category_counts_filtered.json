@@ -1,0 +1,117 @@
+[
+    {
+        "Group": "Fatty Acyl (FA)",
+        "Count": 4474,
+        "Type": "Category"
+    },
+    {
+        "Group": "Prenol Lipid (PR)",
+        "Count": 1949,
+        "Type": "Category"
+    },
+    {
+        "Group": "Polyketide (PK)",
+        "Count": 1299,
+        "Type": "Category"
+    },
+    {
+        "Group": "Sterol Lipid (ST)",
+        "Count": 1239,
+        "Type": "Category"
+    },
+    {
+        "Group": "Glycerophospholipid (GP)",
+        "Count": 975,
+        "Type": "Category"
+    },
+    {
+        "Group": "Fatty Acyl (FA), Glycerophospholipid (GP)",
+        "Count": 903,
+        "Type": "Category"
+    },
+    {
+        "Group": "NotLipidType",
+        "Count": 800,
+        "Type": "Category"
+    },
+    {
+        "Group": "Prenol Lipid (PR), Glycerophospholipid (GP)",
+        "Count": 283,
+        "Type": "Category"
+    },
+    {
+        "Group": "Fatty Acyl (FA), Prenol Lipid (PR)",
+        "Count": 243,
+        "Type": "Category"
+    },
+    {
+        "Group": "Fatty Acyl (FA), Glycerolipid (GL)",
+        "Count": 208,
+        "Type": "Category"
+    },
+    {
+        "Group": "Glycerolipid (GL)",
+        "Count": 196,
+        "Type": "Category"
+    },
+    {
+        "Group": "Fatty Acyl (FA), Sterol Lipid (ST)",
+        "Count": 190,
+        "Type": "Category"
+    },
+    {
+        "Group": "Fatty Acyl (FA), Prenol Lipid (PR), Glycerophospholipid (GP)",
+        "Count": 134,
+        "Type": "Category"
+    },
+    {
+        "Group": "Fatty Acyl (FA), Polyketide (PK)",
+        "Count": 100,
+        "Type": "Category"
+    },
+    {
+        "Group": "Fatty Acyl (FA), Sphingolipid (SP)",
+        "Count": 94,
+        "Type": "Category"
+    },
+    {
+        "Group": "Prenol Lipid (PR), Glycerophospholipid (GP), Glycerolipid (GL)",
+        "Count": 94,
+        "Type": "Category"
+    },
+    {
+        "Group": "Prenol Lipid (PR), Glycerolipid (GL)",
+        "Count": 90,
+        "Type": "Category"
+    },
+    {
+        "Group": "Saccharolipid (SL)",
+        "Count": 88,
+        "Type": "Category"
+    },
+    {
+        "Group": "Sphingolipid (SP)",
+        "Count": 83,
+        "Type": "Category"
+    },
+    {
+        "Group": "Prenol Lipid (PR), Polyketide (PK)",
+        "Count": 64,
+        "Type": "Category"
+    },
+    {
+        "Group": "Glycerophospholipid (GP), Sterol Lipid (ST)",
+        "Count": 57,
+        "Type": "Category"
+    },
+    {
+        "Group": "Fatty Acyl (FA), Glycerophospholipid (GP), Sterol Lipid (ST)",
+        "Count": 57,
+        "Type": "Category"
+    },
+    {
+        "Group": "Prenol Lipid (PR), Sterol Lipid (ST)",
+        "Count": 53,
+        "Type": "Category"
+    }
+]

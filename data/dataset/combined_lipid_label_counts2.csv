@@ -1,0 +1,123 @@
+Group,Count,Type
+Fatty Acyl (FA),4474,Category
+Prenol Lipid (PR),1949,Category
+Polyketide (PK),1299,Category
+Sterol Lipid (ST),1239,Category
+Glycerophospholipid (GP),975,Category
+"Fatty Acyl (FA), Glycerophospholipid (GP)",903,Category
+NotLipidType,800,Category
+"Prenol Lipid (PR), Glycerophospholipid (GP)",283,Category
+"Fatty Acyl (FA), Prenol Lipid (PR)",243,Category
+"Fatty Acyl (FA), Glycerolipid (GL)",208,Category
+Glycerolipid (GL),196,Category
+"Fatty Acyl (FA), Sterol Lipid (ST)",190,Category
+"Fatty Acyl (FA), Prenol Lipid (PR), Glycerophospholipid (GP)",134,Category
+"Fatty Acyl (FA), Polyketide (PK)",100,Category
+"Fatty Acyl (FA), Sphingolipid (SP)",94,Category
+"Prenol Lipid (PR), Glycerophospholipid (GP), Glycerolipid (GL)",94,Category
+"Prenol Lipid (PR), Glycerolipid (GL)",90,Category
+Saccharolipid (SL),88,Category
+Sphingolipid (SP),83,Category
+"Prenol Lipid (PR), Polyketide (PK)",64,Category
+"Glycerophospholipid (GP), Sterol Lipid (ST)",57,Category
+"Fatty Acyl (FA), Glycerophospholipid (GP), Sterol Lipid (ST)",57,Category
+"Prenol Lipid (PR), Sterol Lipid (ST)",53,Category
+"Glycerophospholipid (GP), Glycerolipid (GL)",46,Category
+"Fatty Acyl (FA), Glycerophospholipid (GP), Glycerolipid (GL)",39,Category
+"Fatty Acyl (FA), Prenol Lipid (PR), Glycerophospholipid (GP), Glycerolipid (GL)",37,Category
+"Fatty Acyl (FA), Prenol Lipid (PR), Polyketide (PK)",26,Category
+"Fatty Acyl (FA), Prenol Lipid (PR), Glycerophospholipid (GP), Sterol Lipid (ST)",25,Category
+"Fatty Acyl (FA), Prenol Lipid (PR), Sterol Lipid (ST)",22,Category
+"Fatty Acyl (FA), Prenol Lipid (PR), Glycerophospholipid (GP), Polyketide (PK)",21,Category
+"Prenol Lipid (PR), Glycerophospholipid (GP), Polyketide (PK)",16,Category
+"Fatty Acyl (FA), Prenol Lipid (PR), Glycerolipid (GL)",14,Category
+"Fatty Acyl (FA), Saccharolipid (SL)",14,Category
+"Fatty Acyl (FA), Prenol Lipid (PR), Saccharolipid (SL)",12,Category
+"Sterol Lipid (ST), Polyketide (PK)",11,Category
+"Prenol Lipid (PR), Glycerophospholipid (GP), Sterol Lipid (ST)",10,Category
+"Fatty Acyl (FA), Sterol Lipid (ST), Glycerolipid (GL)",10,Category
+"Fatty Acyl (FA), Glycerophospholipid (GP), Sterol Lipid (ST), Glycerolipid (GL)",9,Category
+"Sterol Lipid (ST), Glycerolipid (GL)",8,Category
+"Fatty Acyl (FA), Sterol Lipid (ST), Polyketide (PK)",6,Category
+"Fatty Acyl (FA), Glycerophospholipid (GP), Sphingolipid (SP)",4,Category
+"Fatty Acyl (FA), Prenol Lipid (PR), Glycerophospholipid (GP), Sterol Lipid (ST), Glycerolipid (GL)",4,Category
+"Glycerophospholipid (GP), Polyketide (PK)",4,Category
+"Fatty Acyl (FA), Glycerophospholipid (GP), Polyketide (PK)",4,Category
+"Fatty Acyl (FA), Glycerolipid (GL), Sphingolipid (SP)",4,Category
+"Prenol Lipid (PR), Glycerophospholipid (GP), Sterol Lipid (ST), Glycerolipid (GL)",3,Category
+"Fatty Acyl (FA), Prenol Lipid (PR), Polyketide (PK), Glycerolipid (GL)",3,Category
+"Fatty Acyl (FA), Prenol Lipid (PR), Glycerophospholipid (GP), Polyketide (PK), Glycerolipid (GL)",3,Category
+"Prenol Lipid (PR), Sterol Lipid (ST), Polyketide (PK)",3,Category
+"Glycerophospholipid (GP), Sphingolipid (SP)",3,Category
+"Glycerophospholipid (GP), Sterol Lipid (ST), Glycerolipid (GL)",2,Category
+"Fatty Acyl (FA), Prenol Lipid (PR), Sterol Lipid (ST), Polyketide (PK)",2,Category
+"Fatty Acyl (FA), Prenol Lipid (PR), Sterol Lipid (ST), Sphingolipid (SP)",1,Category
+"Fatty Acyl (FA), Glycerophospholipid (GP), Saccharolipid (SL)",1,Category
+"Prenol Lipid (PR), Sterol Lipid (ST), Glycerolipid (GL)",1,Category
+"Fatty Acyl (FA), Glycerophospholipid (GP), Sterol Lipid (ST), Saccharolipid (SL)",1,Category
+"Fatty Acyl (FA), Prenol Lipid (PR), Glycerophospholipid (GP), Sterol Lipid (ST), Polyketide (PK)",1,Category
+"Glycerophospholipid (GP), Sterol Lipid (ST), Sphingolipid (SP)",1,Category
+"Fatty Acyl (FA), Glycerolipid (GL), Saccharolipid (SL)",1,Category
+"Fatty Acyl (FA), Polyketide (PK), Sphingolipid (SP)",1,Category
+"Fatty Acyl (FA), Prenol Lipid (PR), Glycerophospholipid (GP), Saccharolipid (SL)",1,Category
+0 1 0 0 0 0 0 0 0,4474,Label
+0 0 1 0 0 0 0 0 0,1949,Label
+0 0 0 0 0 1 0 0 0,1299,Label
+0 0 0 0 1 0 0 0 0,1239,Label
+0 0 0 1 0 0 0 0 0,975,Label
+0 1 0 1 0 0 0 0 0,903,Label
+1 0 0 0 0 0 0 0 0,800,Label
+0 0 1 1 0 0 0 0 0,283,Label
+0 1 1 0 0 0 0 0 0,243,Label
+0 1 0 0 0 0 1 0 0,208,Label
+0 0 0 0 0 0 1 0 0,196,Label
+0 1 0 0 1 0 0 0 0,190,Label
+0 1 1 1 0 0 0 0 0,134,Label
+0 1 0 0 0 1 0 0 0,100,Label
+0 1 0 0 0 0 0 1 0,94,Label
+0 0 1 1 0 0 1 0 0,94,Label
+0 0 1 0 0 0 1 0 0,90,Label
+0 0 0 0 0 0 0 0 1,88,Label
+0 0 0 0 0 0 0 1 0,83,Label
+0 0 1 0 0 1 0 0 0,64,Label
+0 0 0 1 1 0 0 0 0,57,Label
+0 1 0 1 1 0 0 0 0,57,Label
+0 0 1 0 1 0 0 0 0,53,Label
+0 0 0 1 0 0 1 0 0,46,Label
+0 1 0 1 0 0 1 0 0,39,Label
+0 1 1 1 0 0 1 0 0,37,Label
+0 1 1 0 0 1 0 0 0,26,Label
+0 1 1 1 1 0 0 0 0,25,Label
+0 1 1 0 1 0 0 0 0,22,Label
+0 1 1 1 0 1 0 0 0,21,Label
+0 0 1 1 0 1 0 0 0,16,Label
+0 1 1 0 0 0 1 0 0,14,Label
+0 1 0 0 0 0 0 0 1,14,Label
+0 1 1 0 0 0 0 0 1,12,Label
+0 0 0 0 1 1 0 0 0,11,Label
+0 0 1 1 1 0 0 0 0,10,Label
+0 1 0 0 1 0 1 0 0,10,Label
+0 1 0 1 1 0 1 0 0,9,Label
+0 0 0 0 1 0 1 0 0,8,Label
+0 1 0 0 1 1 0 0 0,6,Label
+0 1 0 1 0 0 0 1 0,4,Label
+0 1 1 1 1 0 1 0 0,4,Label
+0 0 0 1 0 1 0 0 0,4,Label
+0 1 0 1 0 1 0 0 0,4,Label
+0 1 0 0 0 0 1 1 0,4,Label
+0 0 1 1 1 0 1 0 0,3,Label
+0 1 1 0 0 1 1 0 0,3,Label
+0 1 1 1 0 1 1 0 0,3,Label
+0 0 1 0 1 1 0 0 0,3,Label
+0 0 0 1 0 0 0 1 0,3,Label
+0 0 0 1 1 0 1 0 0,2,Label
+0 1 1 0 1 1 0 0 0,2,Label
+0 1 1 0 1 0 0 1 0,1,Label
+0 1 0 1 0 0 0 0 1,1,Label
+0 0 1 0 1 0 1 0 0,1,Label
+0 1 0 1 1 0 0 0 1,1,Label
+0 1 1 1 1 1 0 0 0,1,Label
+0 0 0 1 1 0 0 1 0,1,Label
+0 1 0 0 0 0 1 0 1,1,Label
+0 1 0 0 0 1 0 1 0,1,Label
+0 1 1 1 0 0 0 0 1,1,Label
