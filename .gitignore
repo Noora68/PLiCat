@@ -5,6 +5,9 @@
 /process_data/dataset/lipid_protein_4_columns.csv
 /process_data/dataset/matched_proteins2.csv
 
+/process_data/.ipynb_checkpoints
+/lpr/.ipynb_checkpoints
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
