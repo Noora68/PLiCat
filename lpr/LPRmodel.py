@@ -129,4 +129,5 @@ class LPR(nn.Module):
         # 3. Classification head for final output
         logits = self.classifier(cls_output)
 
+        # Returns regression values and classification embedding vectors
         return logits, cls_output
