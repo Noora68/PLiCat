@@ -19,9 +19,8 @@ class LPR(nn.Module):
             num_classes: int
                 Number of classes for the classification task (default: 9)
         """
-        super(LPR, self).__init__()  # Initialize nn.Module parent class
+        super(LPR, self).__init__()
 
-        # Save hyperparameters
         self.esmc_unfreeze_last_n = esmc_unfreeze_last_n
         self.bert_unfreeze_last_n = bert_unfreeze_last_n
         self.num_classes = num_classes
@@ -43,16 +42,16 @@ class LPR(nn.Module):
         for i in range(start_layer, total_esmc_layers):
             for param in self.esmc.transformer.blocks[i].parameters():
                 param.requires_grad = True  # True = enable gradient update
-        # Thaw the embedding layer when fully released
+        # Unfreeze the embedding layer when fully released
         if start_layer == 0:
             for param in self.esmc.embed.parameters():
                 param.requires_grad = True
 
         # Dimensionality reduction: ESMC output (960-d) → BERT input (768-d)
-        self.Linear960_768 = nn.Sequential(  # Sequential runs modules in order
-            nn.Linear(in_features=960, out_features=768, bias=True),  # Linear projection: 960→768
-            nn.GELU(),  # Activation function for non-linearity
-            nn.LayerNorm((768,), eps=1e-05, elementwise_affine=True),  # Layer normalization for stable training
+        self.Linear960_768 = nn.Sequential(
+            nn.Linear(in_features=960, out_features=768, bias=True),
+            nn.GELU(),
+            nn.LayerNorm((768,), eps=1e-05, elementwise_affine=True),
         )
 
         # Load pretrained BERT model (base version, uncased)
@@ -70,16 +69,17 @@ class LPR(nn.Module):
         for i in range(start_layer, total_bert_layers):
             for param in self.bert.encoder.layer[i].parameters():
                 param.requires_grad = True
-        # Thaw the embedding layer when fully released
+
+        # Unfreeze the embedding layer when fully released
         if start_layer == 0:
             for param in self.bert.embeddings.parameters():
                 param.requires_grad = True
 
         # Classification head: uses the BERT [CLS] token output for final classification
         self.classifier = nn.Sequential(
-            nn.Linear(in_features=768, out_features=768, bias=True),  # Feature transformation
-            nn.GELU(),  # Activation function
-            nn.LayerNorm((768,), eps=1e-05, elementwise_affine=True),  # Layer normalization
+            nn.Linear(in_features=768, out_features=768, bias=True),
+            nn.GELU(),
+            nn.LayerNorm((768,), eps=1e-05, elementwise_affine=True),
             nn.Linear(768, num_classes)  # Output logits for final class prediction
         )
 
@@ -102,12 +102,15 @@ class LPR(nn.Module):
 
         # 1. Feature extraction with ESMC
         output = self.esmc(input_ids, attention_mask)
+
         embeddings = output.embeddings  # Shape: (batch_size, sequence_length, 960)
+
         # Project to 768-d for BERT
         embeddings = self.Linear960_768(embeddings)
 
         # Generate position encodings (required by BERT)
         batch_size, seq_len, _ = embeddings.size()  # Get batch size and sequence length
+
         # Create position indices [0, 1, ..., seq_len-1], expand to all samples in batch
         position_ids = torch.arange(seq_len, dtype=torch.long, device=embeddings.device) \
             .unsqueeze(0).expand(batch_size, seq_len)
@@ -121,8 +124,9 @@ class LPR(nn.Module):
         )
 
         # Extract [CLS] token output (first token used as sequence-level representation)
-        cls_output = outputs.last_hidden_state[:, 0]  # Take the feature of the first position
+        cls_output = outputs.last_hidden_state[:, 0]
 
         # 3. Classification head for final output
         logits = self.classifier(cls_output)
+
         return logits, cls_output
