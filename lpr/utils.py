@@ -268,7 +268,7 @@ def plot_multilabel_confusion_matrix(
                 xticklabels=label_names, yticklabels=label_names)
     plt.xlabel('Predicted Label')
     plt.ylabel('True Label')
-    plt.title('Label Co-occurrence Matrix')
+    plt.title('Confusion matrix according to label statistics')
     plt.tight_layout()
 
     save_path = os.path.join(output_dir, 'multilabel_confusion_matrix.png')
