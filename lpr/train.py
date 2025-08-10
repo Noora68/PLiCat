@@ -13,7 +13,7 @@ dataset = SequenceDataset(csv_file = './data/train_dataset.csv')
 with open("./data/lipid_9_category.json", "r") as f:
     category_mapping = json.load(f)
 
-# Perform ten-fold cross validation
+# Perform 10-Fold cross-validation training
 histories = train_kfold_model(
     model_class=LPR,
     dataset=dataset,
