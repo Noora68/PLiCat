@@ -16,10 +16,8 @@ from sklearn.metrics import (
     f1_score,
     roc_auc_score,
     average_precision_score,
-    confusion_matrix,
     roc_curve,
     precision_recall_curve,
-    ConfusionMatrixDisplay,
     multilabel_confusion_matrix
 )
 
