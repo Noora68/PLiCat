@@ -69,8 +69,8 @@ def summarize_kfold_results(save_dir="models/kfold", k_folds=10):
         "train_subset_acc", "val_subset_acc",
         "train_macro_f1", "train_weighted_f1",
         "val_macro_f1", "val_weighted_f1",
-        "train_auc-roc", "train_auc-pr", "train_auc-pr-label",
-        "val_auc-roc", "val_auc-pr", "val_auc-pr-label"
+        "train_auc-roc", "train_auc-pr",
+        "val_auc-roc", "val_auc-pr"
     ]
 
     # Initialize results container
@@ -160,10 +160,6 @@ def calculate_metrics(
     # PR AUC metrics
     metrics["pr_auc_macro"] = average_precision_score(y_true, y_prob, average="macro")
     metrics["pr_auc_micro"] = average_precision_score(y_true, y_prob, average="micro")
-
-    # Label-level AUC-PR
-    ap_per_label = average_precision_score(y_true, y_prob, average=None)
-    metrics["pr_auc_label"] = ap_per_label.mean()
 
     # Per-class metrics
     for i, name in enumerate(label_names):

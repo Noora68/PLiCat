@@ -83,9 +83,7 @@ def train_model(model, train_loader, valid_loader, train_class_weights, category
         'train_auc-roc': [],
         'val_auc-roc': [],
         'train_auc-pr': [],
-        'train_auc-pr-label': [],
-        'val_auc-pr': [],
-        'val_auc-pr-label': []
+        'val_auc-pr': []
     }
 
     # Training initialization
@@ -158,13 +156,9 @@ def train_model(model, train_loader, valid_loader, train_class_weights, category
         try:
             train_auc_roc = roc_auc_score(all_train_labels, all_train_probs, average="macro")
             train_auc_pr = average_precision_score(all_train_labels, all_train_probs, average="macro")
-            # Calculate AP by label
-            ap_per_label = average_precision_score(all_train_labels, all_train_probs, average=None)
-            # Take label-level average (macro-style)
-            train_auc_pr_label = ap_per_label.mean()
         except Exception as e:
             print(f"[WARNING] Skipping training AUC calculations: {e}")
-            train_auc_roc, train_auc_pr ,train_auc_pr_label = 0.0, 0.0, 0.0
+            train_auc_roc, train_auc_pr  = 0.0, 0.0
 
         # Validation phase
         model.eval()
@@ -214,13 +208,9 @@ def train_model(model, train_loader, valid_loader, train_class_weights, category
         try:
             val_auc_roc = roc_auc_score(all_labels, all_probs, average="macro")
             val_auc_pr = average_precision_score(all_labels, all_probs, average="macro")
-            # Calculate AP by label
-            ap_per_label = average_precision_score(all_labels, all_probs, average=None)
-            # Take label-level average (macro-style)
-            val_auc_pr_label = ap_per_label.mean()
         except Exception as e:
             print(f"[WARNING] Skipping validation AUC calculations: {e}")
-            val_auc_roc, val_auc_pr, val_auc_pr_label = 0.0, 0.0, 0.0
+            val_auc_roc, val_auc_pr = 0.0, 0.0
 
         # Update history
         history['train_loss'].append(train_loss)
@@ -239,10 +229,10 @@ def train_model(model, train_loader, valid_loader, train_class_weights, category
         history['val_macro_recall'].append(val_macro_recall)
         history['train_auc-roc'].append(train_auc_roc)
         history['train_auc-pr'].append(train_auc_pr)
-        history['train_auc-pr-label'].append(train_auc_pr_label)
+
         history['val_auc-roc'].append(val_auc_roc)
         history['val_auc-pr'].append(val_auc_pr)
-        history['val_auc-pr-label'].append(val_auc_pr_label)
+
 
         # Log epoch results
         epoch_time = time.time() - epoch_start
@@ -253,7 +243,6 @@ def train_model(model, train_loader, valid_loader, train_class_weights, category
             f"Train Macro F1: {train_macro_f1:.4f} | Valid Macro F1: {val_macro_f1:.4f}\n"
             f"Train auc-roc: {train_auc_roc:.4f} | Valid auc-roc: {val_auc_roc:.4f}\n"
             f"Train auc-pr: {train_auc_pr:.4f} | Valid auc-pr: {val_auc_pr:.4f}\n"
-            f"Train auc-pr-label: {train_auc_pr_label:.4f} | Valid auc-pr-label: {val_auc_pr_label:.4f}\n"
         )
         print(epoch_summary)
 
