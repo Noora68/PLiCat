@@ -64,8 +64,6 @@ class LPR(nn.Module):
         # Unfreeze the last `bert_unfreeze_last_n` BERT encoder layers for fine-tuning
         total_bert_layers = len(self.bert.encoder.layer)  # Get total number of BERT encoder layers
         start_layer = max(0, total_bert_layers - self.bert_unfreeze_last_n)
-
-        # Start unfreezing from the last `bert_unfreeze_last_n` layers
         for i in range(start_layer, total_bert_layers):
             for param in self.bert.encoder.layer[i].parameters():
                 param.requires_grad = True
