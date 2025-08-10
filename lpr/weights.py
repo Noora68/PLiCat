@@ -4,12 +4,12 @@ from collections import defaultdict
 import os
 import numpy as np
 
-def compute_class_weights(train_loader, category_mapping, save_path="./data", filename="class_weight.json"):
+def compute_class_weights(data_loader, category_mapping, save_path="./data", filename="class_weight.json"):
     """
     Compute class weights for multi-label classification to address class imbalance
 
     Parameters:
-    train_loader -- DataLoader for training data (returns binary label vectors of length 9)
+    data_loader -- DataLoader for training data (returns binary label vectors of length 9)
     category_mapping -- Dictionary mapping category indices to names
     save_path -- Directory path to save weights (optional)
     filename -- Filename for saving weights JSON (default: "class_weight.json")
@@ -22,7 +22,7 @@ def compute_class_weights(train_loader, category_mapping, save_path="./data", fi
     total_samples = 0
 
     # Iterate through training batches to count class occurrences
-    for batch in train_loader:
+    for batch in data_loader:
         # Convert labels to numpy for efficient processing
         labels_np = batch['labels'].numpy()
         total_samples += labels_np.shape[0]
