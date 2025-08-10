@@ -27,7 +27,7 @@ def train_model(model, train_loader, valid_loader, train_class_weights, category
 
     Parameters:
     model -- LPR model to train
-    train_loader -- Training data loader
+    data_loader -- Training data loader
     valid_loader -- Validation data loader
     train_class_weights -- Class weights tensor for training
     category_mapping -- Dictionary mapping category indices to names
@@ -302,7 +302,6 @@ def train_model(model, train_loader, valid_loader, train_class_weights, category
 
     return history
 
-# K-Fold Cross Validation
 def train_kfold_model(model_class, dataset, class_weights, category_mapping,
                       k=10, num_epochs=10, lr=2e-5, batch_size=16,
                       early_stop_patience=5, save_dir="lpr-models/kfold"):
