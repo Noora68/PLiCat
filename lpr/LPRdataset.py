@@ -1,6 +1,6 @@
 import pandas as pd
 import torch
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import Dataset
 from esm.tokenization import EsmSequenceTokenizer
 
 # Custom dataset loader to read sequences and labels from a CSV file
