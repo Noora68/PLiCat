@@ -2,6 +2,7 @@
 ## Table of Contents
 - [Introduction](#introduction)
 - [Usage](#usage)
+- [Evaluation](#evaluation)
 - [Limitations](#Limitations)
 - [Installation](#installation)
 - [Citation](#citation)
@@ -14,6 +15,10 @@
 - 📊 Provides attribution heatmaps and embedding heatmaps for model interpretability and so on.
 
 We developed a multi-label classification model named LPR (lipid binding protein recognition),that predicts protein-lipid binding abilities based on amino acid sequences. This model utilizes a hybrid framework integrating ESM Cambrian (ESM Team, 2024) and BERT (Devlin et al., 2018).  We also carefully developed training datasets and disease mutation datasets for model training and validation. 
+
+**Overall schematic framework of LPR**:
+
+![LPR Architecture](visualization/images/LPR-Architecture.jpg)
 
 
 ## Usage
@@ -109,6 +114,9 @@ Saccharolipid (SL)       : 0.0000
 ```
 ---
 
+## Evaluation
+
+
 ## Limitations
 
 * Trained only on lipid-binding protein data and may not generalize to other functions.
@@ -125,7 +133,8 @@ Saccharolipid (SL)       : 0.0000
 If you find this repo useful, please cite:
 
 ```bibtex
-@article{your2025paper,
+@article{
+  your2025paper,
   title={Deciphering the code of lipid binding by large language model},
   author={Feitong Dong,},
   journal={Bioinformatics},
