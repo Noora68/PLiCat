@@ -1,4 +1,5 @@
-# Lipid-binding-Protein-Recognition-LPR
+<h1 align="center">🧬 Lipid-binding Protein Recognition (LPR)</h1>
+
 ## Table of Contents
 - [Introduction](#introduction)
 - [OnlineDemo](#onlinedemo)
