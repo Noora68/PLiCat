@@ -1,8 +1,8 @@
 # Lipid-binding-Protein-Recognition-LPR
 ## Table of Contents
 - [Introduction](#introduction)
+- [OnlineDemo](#onlinedemo)
 - [Usage](#usage)
-- [Limitations](#Limitations)
 - [Installation](#installation)
 - [Citation](#citation)
 - [License](#license)
@@ -20,7 +20,7 @@ We developed a multi-label classification model named LPR (lipid binding protein
 ![LPR Architecture](visualization/images/LPR-Architecture.jpg)
 
 
-## Usage
+## OnlineDemo
 ---
 - 📄 **Paper**: [https://...](https://....)  
 - 🤗 **HuggingFace Repository**: [https://huggingface.co/Noora68/lpr-0.4B](https://huggingface.co/Noora68/lpr-0.4B)  
@@ -29,7 +29,9 @@ We developed a multi-label classification model named LPR (lipid binding protein
 ---
 ---
 
-## install the latest version：
+## Usage
+
+**install the latest version**：
 
 ```python
 pip install lpr_model==1.1.1
@@ -113,40 +115,55 @@ Saccharolipid (SL)       : 0.0000
 ```
 ---
 
-## Limitations
+## ⚙️ Installation
 
-* Trained only on lipid-binding protein data and may not generalize to other functions.
-* Model performance is best with sequence lengths under 500.
-* Dataset size is limited compared to large-scale protein corpora.
-* Model may reflect biases present in training data (e.g., under-representation of certain lipid types).
+### 1. 📥 Clone the repository
+
+```bash
+git clone https://github.com/Noora68/Lipid-binding-Protein-Recognition-LPR.git
+cd Lipid-binding-Protein-Recognition-LPR
+```
 
 ---
 
-## Installation
-Clone the repo:
+### 2. 🌱 Create environment & install dependencies
+
 ```bash
-git clone https://github.com/Noora68/Lipid-binding-Protein-Recognition-LPR.git
-cd repo
-
-Create environment and install dependencies:
-
+# Create a new conda environment
 conda create -n lprenv python=3.12
+
+# Activate the environment
 conda activate lprenv
 
+# Install dependencies
 pip install -r requirements.txt
+```
 
-Train the model:
+---
+
+### 3. 🚀 Train the model
+
 ```bash
 python train.py
+```
 
-Run evaluation:
-Ten-fold model ensemble reasoning test:
+---
+
+### 4. 📊 Run evaluation
+
+#### 🔹 Ten-fold model ensemble reasoning test
+
+```bash
 python Integrated_Reasoning.py
-Single model inference test:
+```
 
+#### 🔹 Single model inference test
+
+```bash
 python single_model_eval.py
+```
 
-
+---
 
 ## Citation
 
