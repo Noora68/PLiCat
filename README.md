@@ -2,7 +2,6 @@
 ## Table of Contents
 - [Introduction](#introduction)
 - [Usage](#usage)
-- [Evaluation](#evaluation)
 - [Limitations](#Limitations)
 - [Installation](#installation)
 - [Citation](#citation)
@@ -114,9 +113,6 @@ Saccharolipid (SL)       : 0.0000
 ```
 ---
 
-## Evaluation
-
-
 ## Limitations
 
 * Trained only on lipid-binding protein data and may not generalize to other functions.
@@ -127,6 +123,30 @@ Saccharolipid (SL)       : 0.0000
 ---
 
 ## Installation
+Clone the repo:
+```bash
+git clone https://github.com/Noora68/Lipid-binding-Protein-Recognition-LPR.git
+cd repo
+
+Create environment and install dependencies:
+
+conda create -n lprenv python=3.12
+conda activate lprenv
+
+pip install -r requirements.txt
+
+Train the model:
+```bash
+python train.py
+
+Run evaluation:
+Ten-fold model ensemble reasoning test:
+python Integrated_Reasoning.py
+Single model inference test:
+
+python single_model_eval.py
+
+
 
 ## Citation
 
