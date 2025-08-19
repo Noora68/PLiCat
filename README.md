@@ -2,9 +2,7 @@
 ## Table of Contents
 - [Introduction](#introduction)
 - [Usage](#usage)
-- [Examples](#examples)
-- [Dataset](#dataset)
-- [Results](#results)
+- [Limitations](#Limitations)
 - [Installation](#installation)
 - [Citation](#citation)
 - [License](#license)
@@ -24,4 +22,121 @@ We developed a multi-label classification model named LPR (lipid binding protein
 - 🤗 **HuggingFace Repository**: [https://huggingface.co/Noora68/lpr-0.4B](https://huggingface.co/Noora68/lpr-0.4B)  
 - 🚀 **Online Demo**: [https://colab.research.google.com/drive/1wGSZsy7KyYoJf2PiXzP4SVLXonl-cWb9?usp=sharing](https://colab.research.google.com/drive/1wGSZsy7KyYoJf2PiXzP4SVLXonl-cWb9?usp=sharing)  
 - 📂 **Datasets**: [https://huggingface.co/datasets/Noora68/lpr-dataset-1.0](https://huggingface.co/datasets/Noora68/lpr-dataset-1.0)  
+---
+---
+
+## install the latest version：
+
+```python
+pip install lpr_model==1.1.1
+
+````
+---
+
+```python
+from lpr_model import LPR
+import torch
+from torch.nn.utils.rnn import pad_sequence
+from esm.tokenization import EsmSequenceTokenizer
+
+# Set device (GPU if available, otherwise CPU)
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+tokenizer = EsmSequenceTokenizer()
+
+# Default lipid type dictionary
+default_dict = {
+    "0": "NotLipidType",
+    "1": "Fatty Acyl (FA)",
+    "2": "Prenol Lipid (PR)",
+    "3": "Glycerophospholipid (GP)",
+    "4": "Sterol Lipid (ST)",
+    "5": "Polyketide (PK)",
+    "6": "Glycerolipid (GL)",
+    "7": "Sphingolipid (SP)",
+    "8": "Saccharolipid (SL)"
+}
+
+# Load pretrained LPR model
+model = LPR.from_pretrained("Noora68/lpr-0.4B").to(device)
+
+# Example protein sequence
+sequence = "MDSNFLKYLSTAPVLFTVWLSFTASFIIEANRFFPDMLYFPM"
+
+# Tokenize the sequence -> input_ids
+input_ids = torch.tensor(tokenizer.encode(sequence))
+
+# Add batch dimension: (batch_size=1, length)
+input_ids = input_ids.unsqueeze(0)
+
+# Pad to the longest sequence in the batch
+input_ids_padded = pad_sequence(input_ids, batch_first=True, padding_value=tokenizer.pad_token_id)
+
+# Build attention mask: 1 for real tokens, 0 for padding
+attention_mask = (input_ids_padded != tokenizer.pad_token_id).long()
+
+# Move tensors to the same device as model
+input_ids_padded = input_ids_padded.to(device)
+attention_mask = attention_mask.to(device)
+
+# Forward pass (no gradient needed during inference)
+with torch.no_grad():
+    outputs = model(input_ids_padded, attention_mask)
+
+# Convert logits to probabilities using sigmoid
+probs = torch.sigmoid(outputs['logits'])
+
+# Convert to CPU and numpy array
+probs = probs.squeeze().detach().cpu().numpy()
+
+# Print results: add a check mark if probability > 0.6
+for i, p in enumerate(probs):
+    mark = " √" if p > 0.6 else ""
+    print(f"{default_dict[str(i)]:<25}: {p:.4f}{mark}")
+
+````
+
+## output of the above example is:
+```
+NotLipidType             : 0.0007
+Fatty Acyl (FA)          : 0.1092
+Prenol Lipid (PR)        : 0.9178 √
+Glycerophospholipid (GP) : 0.6059 √
+Sterol Lipid (ST)        : 0.0083
+Polyketide (PK)          : 0.0026
+Glycerolipid (GL)        : 0.0771
+Sphingolipid (SP)        : 0.0002
+Saccharolipid (SL)       : 0.0000
+```
+---
+
+## Limitations
+
+* Trained only on lipid-binding protein data and may not generalize to other functions.
+* Model performance is best with sequence lengths under 500.
+* Dataset size is limited compared to large-scale protein corpora.
+* Model may reflect biases present in training data (e.g., under-representation of certain lipid types).
+
+---
+
+## Installation
+
+## Citation
+
+If you find this repo useful, please cite:
+
+```bibtex
+@article{your2025paper,
+  title={Deciphering the code of lipid binding by large language model},
+  author={Feitong Dong,},
+  journal={Bioinformatics},
+  year={2025}
+}
+```
+
+---
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
 ---
