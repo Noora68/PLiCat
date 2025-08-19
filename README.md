@@ -6,7 +6,8 @@
 - [Installation](#installation)
 - [Citation](#citation)
 - [License](#license)
-- 
+
+
 ## Introduction
 
 - 🔬 a hybrid framework integrating ESM Cambrian (ESM Team, 2024) and BERT (Devlin et al., 2018) for multi-label classification.
@@ -115,7 +116,7 @@ Saccharolipid (SL)       : 0.0000
 ```
 ---
 
-## ⚙️ Installation
+## Installation<a id="installation"></a>
 
 ### 1. 📥 Clone the repository
 
@@ -123,7 +124,6 @@ Saccharolipid (SL)       : 0.0000
 git clone https://github.com/Noora68/Lipid-binding-Protein-Recognition-LPR.git
 cd Lipid-binding-Protein-Recognition-LPR
 ```
-
 ---
 
 ### 2. 🌱 Create environment & install dependencies
@@ -138,7 +138,6 @@ conda activate lprenv
 # Install dependencies
 pip install -r requirements.txt
 ```
-
 ---
 
 ### 3. 🚀 Train the model
