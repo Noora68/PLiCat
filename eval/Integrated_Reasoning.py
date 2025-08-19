@@ -1,11 +1,17 @@
+import os
+import sys
 import torch
 from torch.utils.data import Dataset, DataLoader
 from typing import List, Tuple
 from tqdm import tqdm
 import numpy as np
-import os
+
+# Find the project root directory and call os.path.dirname multiple times to find the directory upwards
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(project_root)
+
 from lpr.LPRmodel import LPR
-from lpr.LPRdataset import SequenceDataset
+from LPRdataset import SequenceDataset,collate_fn_dynamic_padding
 from lpr.utils import calculate_metrics, plot_roc_pr_curves, plot_multilabel_confusion_matrix, \
     save_pred_results, save_metrics_to_csv, summarize_kfold_results, load_model_from_checkpoint
 
@@ -44,7 +50,7 @@ def ensemble_predict(
 
     # 2. Create dataset and dataloader
     dataset = SequenceDataset(csv_file)
-    dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=False)
+    dataloader = DataLoader(dataset, batch_size=batch_size, collate_fn=collate_fn_dynamic_padding,shuffle=False)
 
     # 3. Initialize storage lists
     all_probs = []  # Store probabilities from each model
@@ -115,15 +121,16 @@ def ensemble_predict(
 
 # Inference and evaluation
 if __name__ == "__main__":
+
     # Create output directory
-    output_dir = 'lpr-results'
+    output_dir = 'integration-results'
     os.makedirs(output_dir, exist_ok=True)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     # If using weighted mode, provide metrics such as F1/AUC from each fold
     weights = [0.812, 0.801, 0.825, 0.798, 0.815, 0.811, 0.814, 0.799, 0.823, 0.820]
 
-    test_path = './data/test_dataset.csv'  # Test dataset path
+    test_path = '../lpr/data/test_dataset.csv'  # Test dataset path
 
     models = [
         load_model_from_checkpoint(LPR, "lpr-models/kfold/best_model_fold1.pt", device),
@@ -155,6 +162,7 @@ if __name__ == "__main__":
     np.save(os.path.join(output_dir, "true_labels.npy"), true_labels)
 
     LABEL_NAMES = ['NO', 'FA', 'PR', 'GP', 'ST', 'PK', 'GL', 'SP', 'SL']
+
     # Save model predictions to CSV
     save_pred_results(
         probs=probs,
@@ -176,7 +184,10 @@ if __name__ == "__main__":
     metrics = calculate_metrics(y_true=true_labels, y_pred=preds, y_prob=probs, label_names=LABEL_NAMES)
 
     # Plot ROC and PR curves
-    plot_roc_pr_curves(y_true=true_labels, y_prob=probs, label_names=LABEL_NAMES, output_dir=output_dir)
+    plot_roc_pr_curves(y_true=true_labels, y_prob=probs, label_names=LABEL_NAMES, output_dir=output_dir, \
+                       axis_fontsize = 14,   \
+                       legend_fontsize = 12, \
+                       line_width = 1.5 )
 
     # Plot multilabel confusion matrix
     plot_multilabel_confusion_matrix(y_true=true_labels, y_pred=preds, label_names=LABEL_NAMES, output_dir=output_dir)
@@ -199,5 +210,5 @@ if __name__ == "__main__":
     print(f"Micro pr-auc: {metrics['pr_auc_micro']:.4f}")
 
     # Save metrics to CSV
-    save_metrics_to_csv(metrics, "lpr-results/evaluation_metrics.csv")
-    summarize_kfold_results(save_dir="lpr-models/kfold", k_folds=10)
+    save_metrics_to_csv(metrics, os.path.join(output_dir, "evaluation_metrics.csv"))
+

@@ -1,10 +1,11 @@
+import json
+import torch
 from torch.utils.data import DataLoader
 from weights import compute_class_weights
 from LPRdataset import SequenceDataset
-import json
-from LPRmodel import LPR
 from LPRtrain import train_kfold_model
 from utils import summarize_kfold_results
+from LPRmodel import LPR
 
 # Instantiate the dataset
 dataset = SequenceDataset(csv_file = './data/train_dataset.csv')
@@ -20,7 +21,7 @@ histories = train_kfold_model(
     class_weights=compute_class_weights,
     category_mapping=category_mapping,
     k=10,
-    num_epochs=100,
+    num_epochs=30,
     lr=2e-5,
     batch_size=16,
     early_stop_patience=5,

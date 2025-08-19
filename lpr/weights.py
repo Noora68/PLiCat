@@ -1,8 +1,8 @@
-import torch
-import json
-from collections import defaultdict
 import os
+import json
+import torch
 import numpy as np
+from collections import defaultdict
 
 def compute_class_weights(data_loader, category_mapping, save_path="./data", filename="class_weight.json"):
     """
@@ -17,11 +17,12 @@ def compute_class_weights(data_loader, category_mapping, save_path="./data", fil
     Returns:
     class_weights -- Tensor of computed class weights
     """
+
     # Initialize counters for positive class occurrences
     class_counts = defaultdict(int)
     total_samples = 0
 
-    # Iterate through training batches to count class occurrences
+    # Iterate through data_loader batches to count class occurrences
     for batch in data_loader:
         # Convert labels to numpy for efficient processing
         labels_np = batch['labels'].numpy()

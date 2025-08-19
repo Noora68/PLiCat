@@ -1,10 +1,10 @@
+import os
 import time
+import json
 import torch
 import torch.nn as nn
 import torch.optim as optim
 import numpy as np
-import os
-import json
 from tqdm import tqdm
 from utils import get_cosine_scheduler
 from torch.nn.utils.rnn import pad_sequence
@@ -19,6 +19,8 @@ from sklearn.metrics import (
 )
 from iterstrat.ml_stratifiers import MultilabelStratifiedKFold
 from torch.utils.data import Subset, DataLoader
+from esm.tokenization import EsmSequenceTokenizer
+from LPRdataset import collate_fn_dynamic_padding
 
 def train_model(model, train_loader, valid_loader, train_class_weights, category_mapping, fold,
                 num_epochs=10, lr=2e-5, save_dir="lpr-models", early_stop_patience=5):
@@ -39,6 +41,7 @@ def train_model(model, train_loader, valid_loader, train_class_weights, category
     """
     # Device configuration
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
     model = model.to(device)
     train_class_weights = train_class_weights.to(device)
 
@@ -57,12 +60,15 @@ def train_model(model, train_loader, valid_loader, train_class_weights, category
     optimizer = optim.AdamW(optimizer_grouped_parameters, lr=lr)
 
     # Learning rate scheduler - Cosine annealing with warmup
-    total_epochs = 15   #  Here, setting num_epochs to 15 is an empirical value
+    total_epochs = 30   #  Here, setting num_epochs to 30 is an empirical value
     steps_per_epoch = len(train_loader)
     scheduler = get_cosine_scheduler(optimizer, total_epochs, steps_per_epoch)
 
     # Create save directory
     os.makedirs(save_dir, exist_ok=True)
+
+    # Still using the esm word segmentation method
+    tokenizer = EsmSequenceTokenizer()
 
     # Training history tracking
     history = {
@@ -126,7 +132,7 @@ def train_model(model, train_loader, valid_loader, train_class_weights, category
             batch_size = labels.size(0)
             train_loss += loss.item() * batch_size
             probs = torch.sigmoid(outputs)
-            preds = (probs > 0.6).float()
+            preds = (probs >= 0.6).float()
 
             all_train_labels.append(labels.cpu().detach().numpy())
             all_train_preds.append(preds.cpu().detach().numpy())
@@ -158,7 +164,7 @@ def train_model(model, train_loader, valid_loader, train_class_weights, category
             train_auc_pr = average_precision_score(all_train_labels, all_train_probs, average="macro")
         except Exception as e:
             print(f"[WARNING] Skipping training AUC calculations: {e}")
-            train_auc_roc, train_auc_pr  = 0.0, 0.0
+            train_auc_roc, train_auc_pr = 0.0, 0.0
 
         # Validation phase
         model.eval()
@@ -174,6 +180,7 @@ def train_model(model, train_loader, valid_loader, train_class_weights, category
 
         with torch.no_grad():
             for batch in val_bar:
+
                 input_ids = batch['input_ids'].to(device)
                 attention_mask = batch['attention_mask'].to(device)
                 labels = batch['labels'].float().to(device)
@@ -208,6 +215,7 @@ def train_model(model, train_loader, valid_loader, train_class_weights, category
         try:
             val_auc_roc = roc_auc_score(all_labels, all_probs, average="macro")
             val_auc_pr = average_precision_score(all_labels, all_probs, average="macro")
+            
         except Exception as e:
             print(f"[WARNING] Skipping validation AUC calculations: {e}")
             val_auc_roc, val_auc_pr = 0.0, 0.0
@@ -229,10 +237,8 @@ def train_model(model, train_loader, valid_loader, train_class_weights, category
         history['val_macro_recall'].append(val_macro_recall)
         history['train_auc-roc'].append(train_auc_roc)
         history['train_auc-pr'].append(train_auc_pr)
-
         history['val_auc-roc'].append(val_auc_roc)
         history['val_auc-pr'].append(val_auc_pr)
-
 
         # Log epoch results
         epoch_time = time.time() - epoch_start
@@ -264,6 +270,7 @@ def train_model(model, train_loader, valid_loader, train_class_weights, category
         if val_loss < best_val_loss:
             best_val_loss = val_loss
             best_model_path = os.path.join(save_dir, f"best_model_fold{fold}.pt")
+
             torch.save({
                 'epoch': epoch + 1,
                 'model_state_dict': model.state_dict(),
@@ -281,9 +288,9 @@ def train_model(model, train_loader, valid_loader, train_class_weights, category
                 print(f"\nEarly stopping triggered after {early_stop_patience} epochs without improvement")
                 break
 
-    # Save final artifacts
     print(f"\nTraining completed! Best Valid Loss: {best_val_loss:.4f}")
 
+    # Save final artifacts
     history_path = os.path.join(save_dir, f"training_history_fold{fold}.json")
     with open(history_path, "w") as f:
         json.dump(history, f, indent=4)
@@ -309,6 +316,7 @@ def train_kfold_model(model_class, dataset, class_weights, category_mapping,
     early_stop_patience -- Early stopping patience (default 5)
     save_dir -- Base directory for saving results
     """
+
     fold_histories = []
     os.makedirs(save_dir, exist_ok=True)
 
@@ -326,8 +334,10 @@ def train_kfold_model(model_class, dataset, class_weights, category_mapping,
         val_subset = Subset(dataset, val_idx)
 
         # Create data loaders
-        train_loader = DataLoader(train_subset, batch_size=batch_size, shuffle=True)
-        val_loader = DataLoader(val_subset, batch_size=batch_size, shuffle=False)
+        train_loader = DataLoader(train_subset, batch_size=batch_size, collate_fn=collate_fn_dynamic_padding,
+                                  shuffle=True)
+        val_loader = DataLoader(val_subset, batch_size=batch_size, collate_fn=collate_fn_dynamic_padding,
+                                shuffle=False)
 
         # Calculate fold-specific class weights
         fold_weights = class_weights(train_loader, category_mapping,
@@ -335,7 +345,7 @@ def train_kfold_model(model_class, dataset, class_weights, category_mapping,
                                      filename=f"fold{fold_idx + 1}_weights.json")
 
         # Initialize model
-        model = model_class(esmc_unfreeze_last_n=0, bert_unfreeze_last_n=12, num_classes=9)
+        model = model_class(num_classes=9)
 
         # Train model
         history = train_model(

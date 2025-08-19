@@ -1,12 +1,12 @@
+import os
+import json
 import torch
 from torch.utils.data import DataLoader
+from torch.optim.lr_scheduler import LambdaLR
 from typing import List, Dict, Optional
 import numpy as np
 import pandas as pd
-import os
-import json
 import seaborn as sns
-from torch.optim.lr_scheduler import LambdaLR
 import matplotlib.pyplot as plt
 
 from sklearn.metrics import (
@@ -69,8 +69,8 @@ def summarize_kfold_results(save_dir="models/kfold", k_folds=10):
         "train_subset_acc", "val_subset_acc",
         "train_macro_f1", "train_weighted_f1",
         "val_macro_f1", "val_weighted_f1",
-        "train_auc-roc", "train_auc-pr",
-        "val_auc-roc", "val_auc-pr"
+        "train_auc-roc", "train_auc-pr", "train_auc-pr-label",
+        "val_auc-roc", "val_auc-pr", "val_auc-pr-label"
     ]
 
     # Initialize results container
@@ -161,6 +161,10 @@ def calculate_metrics(
     metrics["pr_auc_macro"] = average_precision_score(y_true, y_prob, average="macro")
     metrics["pr_auc_micro"] = average_precision_score(y_true, y_prob, average="micro")
 
+    # Label-level AUC-PR
+    ap_per_label = average_precision_score(y_true, y_prob, average=None)
+    metrics["pr_auc_label"] = ap_per_label.mean()
+
     # Per-class metrics
     for i, name in enumerate(label_names):
         metrics[f"{name}_precision"] = precision_score(y_true[:, i], y_pred[:, i], zero_division=0)
@@ -180,52 +184,47 @@ def plot_roc_pr_curves(
         y_true: np.ndarray,
         y_prob: np.ndarray,
         label_names: List[str],
-        output_dir: str
+        output_dir: str,
+        axis_fontsize: int = 14,
+        legend_fontsize: int = 12,
+        line_width: float = 1.5
 ):
-    """
-    Generate ROC and Precision-Recall curves for each class
-
-    Parameters:
-    y_true -- Ground truth labels (n_samples, n_classes)
-    y_prob -- Predicted probabilities (n_samples, n_classes)
-    label_names -- Names of each class
-    output_dir -- Directory to save plots
-    """
     os.makedirs(output_dir, exist_ok=True)
 
     # ROC curves
-    plt.figure(figsize=(10, 8))
+    plt.figure(figsize=(8, 6))
     for i, name in enumerate(label_names):
         fpr, tpr, _ = roc_curve(y_true[:, i], y_prob[:, i])
         roc_auc = roc_auc_score(y_true[:, i], y_prob[:, i])
-        plt.plot(fpr, tpr, lw=1, label=f'{name} (AUC = {roc_auc:.2f})')
+        plt.plot(fpr, tpr, lw=line_width, label=f'{name} (AUC = {roc_auc:.2f})')
 
-    plt.plot([0, 1], [0, 1], 'k--', lw=2)  # Random classifier line
+    plt.plot([0, 1], [0, 1], 'k--', lw=line_width)  # Random classifier line
     plt.xlim([0.0, 1.0])
     plt.ylim([0.0, 1.05])
-    plt.xlabel('False Positive Rate')
-    plt.ylabel('True Positive Rate')
-    plt.title('ROC Curves per Label')
-    plt.legend(loc="lower right")
+    plt.xlabel('False Positive Rate', fontsize=axis_fontsize)
+    plt.ylabel('True Positive Rate', fontsize=axis_fontsize)
+    plt.title('ROC Curves per Label', fontsize=axis_fontsize)
+    plt.tick_params(axis='both', labelsize=axis_fontsize)
+    plt.legend(loc="lower right", fontsize=legend_fontsize)
     plt.savefig(os.path.join(output_dir, 'roc_curves.png'), dpi=300)
     plt.close()
 
     # Precision-Recall curves
-    plt.figure(figsize=(10, 8))
+    plt.figure(figsize=(8, 6))
     for i, name in enumerate(label_names):
         precision, recall, _ = precision_recall_curve(y_true[:, i], y_prob[:, i])
         pr_auc = average_precision_score(y_true[:, i], y_prob[:, i])
-        plt.plot(recall, precision, lw=1, label=f'{name} (AUC = {pr_auc:.2f})')
+        plt.plot(recall, precision, lw=line_width, label=f'{name} (AUC = {pr_auc:.2f})')
 
     plt.xlim([0.0, 1.0])
     plt.ylim([0.0, 1.05])
-    plt.xlabel('Recall')
-    plt.ylabel('Precision')
-    plt.title('Precision-Recall Curves per Label')
-    plt.legend(loc="lower left")
+    plt.xlabel('Recall', fontsize=axis_fontsize)
+    plt.ylabel('Precision', fontsize=axis_fontsize)
+    plt.title('Precision-Recall Curves per Label', fontsize=axis_fontsize)
+    plt.tick_params(axis='both', labelsize=axis_fontsize)
+    plt.legend(loc="lower left", fontsize=legend_fontsize)
     plt.savefig(os.path.join(output_dir, 'pr_curves.png'), dpi=300)
     plt.close()
-
 
 def plot_multilabel_confusion_matrix(
         y_true: np.ndarray,
@@ -235,7 +234,8 @@ def plot_multilabel_confusion_matrix(
         figsize=(10, 8)
 ):
     """
-    Generate a 9x9 pseudo-confusion matrix for multi-label classification
+    Generate a confusion matrix for multi-label classification that resembles
+    a standard confusion matrix.
 
     Parameters:
     y_true -- Ground truth labels (n_samples, n_classes)
@@ -244,33 +244,53 @@ def plot_multilabel_confusion_matrix(
     output_dir -- Directory to save plot
     figsize -- Figure dimensions (default (10,8))
 
-    The matrix shows co-occurrence counts between true and predicted labels
+    Matrix interpretation:
+    - Rows: True labels (with total counts shown in labels)
+    - Diagonal: Correct predictions (true A and predicted A)
+    - Off-diagonal: Misclassifications (true A but predicted B)
     """
     os.makedirs(output_dir, exist_ok=True)
     num_classes = len(label_names)
     matrix = np.zeros((num_classes, num_classes), dtype=int)
-
-    # Count co-occurrences between true and predicted labels
-    for true_vec, pred_vec in zip(y_true, y_pred):
-        true_labels = np.where(true_vec == 1)[0]
-        pred_labels = np.where(pred_vec == 1)[0]
+    
+    # Precompute true label counts for each class
+    true_label_counts = y_true.sum(axis=0)
+    pred_label_counts = y_pred.sum(axis=0)
+    
+    # Build confusion matrix
+    for i in range(len(y_true)):
+        true_labels = np.where(y_true[i] == 1)[0]
+        pred_labels = np.where(y_pred[i] == 1)[0]
+        
         for t in true_labels:
-            for p in pred_labels:
-                matrix[t, p] += 1  # Count co-occurrence
-
+            if t in pred_labels:  # Correct prediction: true A predicted A
+                matrix[t, t] += 1
+            else:  # Misclassification: true A predicted as other labels
+                for p in pred_labels:
+                    matrix[t, p] += 1
+                    
+    # Create y-tick labels with true counts
+  
+    yticklabels = [
+        f"{name} ({int(true_label_counts[i])}/{int(true_label_counts[i]-matrix[i, :].sum())})" 
+        for i, name in enumerate(label_names)
+    ]
+    
     # Create heatmap visualization
     plt.figure(figsize=figsize)
     sns.heatmap(matrix, annot=True, fmt='d', cmap='YlGnBu',
-                xticklabels=label_names, yticklabels=label_names)
+                xticklabels=label_names, yticklabels=yticklabels)
     plt.xlabel('Predicted Label')
-    plt.ylabel('True Label')
-    plt.title('Confusion matrix according to label statistics')
+    plt.ylabel('True Label (with sample counts)')
+    plt.title('Multi-label Confusion Matrix')
     plt.tight_layout()
 
     save_path = os.path.join(output_dir, 'multilabel_confusion_matrix.png')
     plt.savefig(save_path, dpi=300)
     plt.close()
-    print(f"Co-occurrence matrix saved to: {save_path}")
+    print(f"Confusion matrix saved to: {save_path}")
+
+
 
 
 def save_pred_results(
@@ -425,3 +445,4 @@ def load_model_from_checkpoint(model_class, checkpoint_path, device="cuda"):
     model.to(device)
     model.eval()  # Set to evaluation mode
     return model
+
