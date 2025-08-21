@@ -3,18 +3,18 @@ import torch.nn as nn
 from transformers import BertModel
 from esm.models.esmc import ESMC
 
-# Define the LPR model (a hybrid model combining ESMC and BERT as the main framework + a custom classification head)
+# Define the PLiCat model (a hybrid model combining ESMC and BERT as the main framework + a custom classification head)
 # Purpose: For classification tasks on biological sequence data such as protein sequences
-class LPR(nn.Module):
+class PLiCat(nn.Module):
     def __init__(self, num_classes=9):
         """
-        Initialize the LPR model
+        Initialize the PLiCat model
 
         Parameters:
             num_classes: int
                 Number of classes for the classification task (default: 9)
         """
-        super(LPR, self).__init__()
+        super(PLiCat, self).__init__()
 
         self.num_classes = num_classes
 

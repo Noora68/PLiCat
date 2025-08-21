@@ -9,18 +9,18 @@ from typing import List, Union, Tuple, Optional
 project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(project_root)
 
-from lpr.utils import calculate_metrics, plot_roc_pr_curves,\
+from PLiCat.utils import calculate_metrics, plot_roc_pr_curves,\
                   save_pred_results, process_labels, save_metrics_to_csv, \
                   plot_multilabel_confusion_matrix, load_model_from_checkpoint
 
-from lpr.LPRmodel import LPR
-from lpr.LPRdataset import SequenceDataset ,collate_fn_dynamic_padding
+from PLiCat.PLiCat_model import PLiCat
+from PLiCat.PLiCat_dataset import SequenceDataset ,collate_fn_dynamic_padding
 
 # Inference and evaluation
 if __name__ == "__main__":
     batch_size = 32
     threshold = 0.6
-    test_path = '../lpr/data/test_dataset.csv'  # Test dataset path
+    test_path = '../PLiCat/data/test_dataset.csv'  # Test dataset path
     
     # Create dataset and dataloader
     dataset = SequenceDataset(test_path)
@@ -31,7 +31,7 @@ if __name__ == "__main__":
     # Evaluation scope: evaluate the specified model or the saved model for each round
     model_epochs = [e for e in range(6, 20)]
     models = [
-       load_model_from_checkpoint(LPR, f"best_model{epoch}.pt", device=device)
+       load_model_from_checkpoint(PLiCat, f"best_model{epoch}.pt", device=device)
        for epoch in model_epochs
     ]    # f"best_model{epoch}.pt" is replaced with the actual path
 

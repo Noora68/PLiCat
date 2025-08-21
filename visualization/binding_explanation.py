@@ -15,8 +15,8 @@ from IPython.display import display, HTML
 # Find the project root directory and call os.path.dirname multiple times to find the directory upwards
 project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(project_root)
-from lpr.LPRdataset import BindingDataset, binding_collate_fn_dynamic_padding
-from lpr.LPRmodel import LPR
+from PLiCat.PLiCat_dataset import BindingDataset, binding_collate_fn_dynamic_padding
+from PLiCat.PLiCat_model import PLiCat
 
 
 def tokens_to_str(tokens):
@@ -218,9 +218,9 @@ if __name__ == "__main__":
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-    # Replace with actual model
-    model = torch.load("model.pt", map_location=device, weights_only=False)  # Replace with actual model
-
+    # Replace with the actual model
+    model = load_model_from_checkpoint(PLiCat, f"best_model{epoch}.pt", device=device)
+    model.to(device)
     model.eval()  # Switch to evaluation mode
     model.zero_grad()  # Clear gradients (to avoid accumulation)
 

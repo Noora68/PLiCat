@@ -15,9 +15,9 @@ from collections import defaultdict
 project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(project_root)
 
-from lpr.LPRdataset import SequenceDataset, collate_fn_dynamic_padding
-from lpr.LPRmodel import LPR
-from lpr.utils import load_model_from_checkpoint
+from PLiCat.PLiCat_dataset import SequenceDataset, collate_fn_dynamic_padding
+from PLiCat.PLiCat_model import PLiCat
+from PLiCat.utils import load_model_from_checkpoint
 
 device = "cuda" if torch.cuda.is_available() else "cpu" 
 
@@ -109,11 +109,11 @@ color_list = [
     "#a9a9a9",  # dark gray
 ]
 
-outpath = './lpr_embedding_result'
+outpath = './PLiCat_embedding_result'
 os.makedirs(outpath, exist_ok=True)
 
 # Replace "your_model.pt" ith the actual model
-model = load_model_from_checkpoint(LPR, "your_model.pt", device=device)
+model = load_model_from_checkpoint(PLiCat, "your_model.pt", device=device)
 
 # Switch to evaluation mode
 model.eval()
@@ -190,13 +190,13 @@ for label_id in np.unique(labels_np):
 # Add legend and title
 plt.legend(title="Lipid Categories", fontsize=8, title_fontsize=10, 
            loc='best', bbox_to_anchor=(1.05, 1))
-plt.title("UMAP Projection of LPR-model Embeddings on test_dataset", fontsize=16)
+plt.title("UMAP Projection of PLiCat-model Embeddings on test_dataset", fontsize=16)
 plt.xlabel("UMAP Dimension 1", fontsize=12)
 plt.ylabel("UMAP Dimension 2", fontsize=12)
 plt.grid(alpha=0.1)
 
 # Save image
-output_path = os.path.join(outpath, "trained_LPR-model_embeddings_umap.png")
+output_path = os.path.join(outpath, "trained_PLiCat-model_embeddings_umap.png")
 plt.tight_layout()
 plt.savefig(output_path, dpi=300, bbox_inches='tight')
 plt.close()

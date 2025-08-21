@@ -10,9 +10,9 @@ import numpy as np
 project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(project_root)
 
-from lpr.LPRmodel import LPR
-from LPRdataset import SequenceDataset,collate_fn_dynamic_padding
-from lpr.utils import calculate_metrics, plot_roc_pr_curves, plot_multilabel_confusion_matrix, \
+from PLiCat.PLiCat_model import PLiCat
+from PLiCat.PLiCat_dataset import SequenceDataset,collate_fn_dynamic_padding
+from PLiCat.utils import calculate_metrics, plot_roc_pr_curves, plot_multilabel_confusion_matrix, \
     save_pred_results, save_metrics_to_csv, summarize_kfold_results, load_model_from_checkpoint
 
 @torch.no_grad()
@@ -130,19 +130,19 @@ if __name__ == "__main__":
     # If using weighted mode, provide metrics such as F1/AUC from each fold
     weights = [0.812, 0.801, 0.825, 0.798, 0.815, 0.811, 0.814, 0.799, 0.823, 0.820]
 
-    test_path = '../lpr/data/test_dataset.csv'  # Test dataset path
+    test_path = '../PLiCat/data/test_dataset.csv'  # Test dataset path
 
     models = [
-        load_model_from_checkpoint(LPR, "lpr-models/kfold/best_model_fold1.pt", device),
-        load_model_from_checkpoint(LPR, "lpr-models/kfold/best_model_fold2.pt", device),
-        load_model_from_checkpoint(LPR, "lpr-models/kfold/best_model_fold3.pt", device),
-        load_model_from_checkpoint(LPR, "lpr-models/kfold/best_model_fold4.pt", device),
-        load_model_from_checkpoint(LPR, "lpr-models/kfold/best_model_fold5.pt", device),
-        load_model_from_checkpoint(LPR, "lpr-models/kfold/best_model_fold6.pt", device),
-        load_model_from_checkpoint(LPR, "lpr-models/kfold/best_model_fold7.pt", device),
-        load_model_from_checkpoint(LPR, "lpr-models/kfold/best_model_fold8.pt", device),
-        load_model_from_checkpoint(LPR, "lpr-models/kfold/best_model_fold9.pt", device),
-        load_model_from_checkpoint(LPR, "lpr-models/kfold/best_model_fold10.pt", device)
+        load_model_from_checkpoint(PLiCat, "PLiCat-models/kfold/best_model_fold1.pt", device),
+        load_model_from_checkpoint(PLiCat, "PLiCat-models/kfold/best_model_fold2.pt", device),
+        load_model_from_checkpoint(PLiCat, "PLiCat-models/kfold/best_model_fold3.pt", device),
+        load_model_from_checkpoint(PLiCat, "PLiCat-models/kfold/best_model_fold4.pt", device),
+        load_model_from_checkpoint(PLiCat, "PLiCat-models/kfold/best_model_fold5.pt", device),
+        load_model_from_checkpoint(PLiCat, "PLiCat-models/kfold/best_model_fold6.pt", device),
+        load_model_from_checkpoint(PLiCat, "PLiCat-models/kfold/best_model_fold7.pt", device),
+        load_model_from_checkpoint(PLiCat, "PLiCat-models/kfold/best_model_fold8.pt", device),
+        load_model_from_checkpoint(PLiCat, "PLiCat-models/kfold/best_model_fold9.pt", device),
+        load_model_from_checkpoint(PLiCat, "PLiCat-models/kfold/best_model_fold10.pt", device)
     ]
 
     # Perform ensemble prediction

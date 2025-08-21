@@ -19,9 +19,9 @@ from sklearn.decomposition import PCA
 project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(project_root)
 
-from LPRdataset import DiseaseDataset
-from LPRmodel import LPR
-from utils import binary_entropy, shannon_entropy_batch, shannon_entropy_per_label, load_model_from_checkpoint
+from PLiCat.PLiCat_dataset import DiseaseDataset
+from PLiCat.PLiCat_model import PLiCat
+from PLiCat.utils import binary_entropy, shannon_entropy_batch, shannon_entropy_per_label, load_model_from_checkpoint
 
 # Inference and evaluation
 if __name__ == "__main__":
@@ -46,7 +46,8 @@ if __name__ == "__main__":
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
-    model = torch.load("your-model.pt", map_location=device, weights_only=False)  # Replace with actual model
+    # Replace "your_model.pt" ith the actual model
+    model = load_model_from_checkpoint(PLiCat, "your_model.pt", device=device)
 
     model = model.to(device)
     model.eval()  # Switch to evaluation mode
@@ -98,9 +99,7 @@ if __name__ == "__main__":
 
                 # 5. Model prediction (enable during actual run)
                 # batch_logits, batch_embeddings = model(input_ids_padded, attention_mask)
-                outputs = model(input_ids_padded, attention_mask)
-
-                batch_logits, batch_embeddings = outputs["logits"], outputs["cls_output"]
+                batch_logits, batch_embeddings = model(input_ids_padded, attention_mask)
 
                 # 7. Calculate probabilities and store
                 batch_probs = torch.sigmoid(batch_logits)

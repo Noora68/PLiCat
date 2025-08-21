@@ -21,8 +21,9 @@ from esm.tokenization import EsmSequenceTokenizer
 project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(project_root)
 
-from lpr.LPRmodel import LPR
-from lpr.LPRdataset import SequenceDataset, collate_fn_dynamic_padding
+from PLiCat.PLiCat_model import PLiCat
+from PLiCat.PLiCat_dataset import SequenceDataset, collate_fn_dynamic_padding
+from PLiCat.utils importload_model_from_checkpoint
 
 # Amino acid to index mapping (must be consistent with the model)
 AMINO_ACIDS = "ACDEFGHIKLMNPQRSTVWY"
@@ -249,7 +250,8 @@ if __name__ == "__main__":
 
     tokenizer = EsmSequenceTokenizer()
 
-    model = torch.load("esmc-model6.pt", weights_only=False)  # Replace with the actual model
+    # Replace with the actual model
+    model = load_model_from_checkpoint(PLiCat, f"best_model{epoch}.pt", device=device)
     model.to(device)
     model.eval()  # Switch to evaluation mode
     model.zero_grad()

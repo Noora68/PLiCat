@@ -1,4 +1,4 @@
-<h1 align="center">🧬 Lipid-binding Protein Recognition (LPR)</h1>
+<h1 align="center">🧬 <b>PL<span style="color: red;">i</span>Cat </b>(<b>P</b>rotein–<b>L</b>ipid <span style="color: red;"><b>i</b></span>nteraction <b>Ca</b>tegorization <b>T</b>ool)</h1>
 
 ## Table of Contents
 - [Introduction](#introduction)
@@ -19,7 +19,7 @@ We developed a multi-label classification model named LPR (lipid binding protein
 
 **Overall schematic framework of LPR**:
 
-![LPR Architecture](visualization/images/LPR-Architecture.jpg)
+![LPR Architecture](visualization/images/PLiCat-Architecture.jpg)
 
 
 ## OnlineDemo
@@ -65,7 +65,7 @@ default_dict = {
 }
 
 # Load pretrained LPR model
-model = LPR.from_pretrained("Noora68/lpr-0.4B").to(device)
+model = LPR.from_pretrained("Noora68/PLiCat-0.4B").to(device)
 
 # Example protein sequence
 sequence = "MDSNFLKYLSTAPVLFTVWLSFTASFIIEANRFFPDMLYFPM"

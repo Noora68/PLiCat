@@ -20,15 +20,15 @@ from sklearn.metrics import (
 from iterstrat.ml_stratifiers import MultilabelStratifiedKFold
 from torch.utils.data import Subset, DataLoader
 from esm.tokenization import EsmSequenceTokenizer
-from LPRdataset import collate_fn_dynamic_padding
+from PLiCat_dataset import collate_fn_dynamic_padding
 
 def train_model(model, train_loader, valid_loader, train_class_weights, category_mapping, fold,
-                num_epochs=10, lr=2e-5, save_dir="lpr-models", early_stop_patience=5):
+                num_epochs=10, lr=2e-5, save_dir="PLiCat-models", early_stop_patience=5):
     """
-    Train LPR model with progress tracking and validation monitoring
+    Train PLiCat model with progress tracking and validation monitoring
 
     Parameters:
-    model -- LPR model to train
+    model -- PLiCat model to train
     data_loader -- Training data loader
     valid_loader -- Validation data loader
     train_class_weights -- Class weights tensor for training
@@ -300,7 +300,7 @@ def train_model(model, train_loader, valid_loader, train_class_weights, category
 
 def train_kfold_model(model_class, dataset, class_weights, category_mapping,
                       k=10, num_epochs=10, lr=2e-5, batch_size=16,
-                      early_stop_patience=5, save_dir="lpr-models/kfold"):
+                      early_stop_patience=5, save_dir="PLiCat-models/kfold"):
     """
     Perform K-Fold cross-validation training
 
