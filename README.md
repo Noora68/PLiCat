@@ -15,19 +15,19 @@
 - 🎯 Supports dynamic padding for efficient batch processing.
 - 📊 Provides attribution heatmaps and embedding heatmaps for model interpretability and so on.
 
-We developed a multi-label classification model named LPR (lipid binding protein recognition),that predicts protein-lipid binding abilities based on amino acid sequences. This model utilizes a hybrid framework integrating ESM Cambrian (ESM Team, 2024) and BERT (Devlin et al., 2018).  We also carefully developed training datasets and disease mutation datasets for model training and validation. 
+We developed a multi-label classification model named <b>PL<span style="color: red;">i</span>Cat </b>(<b>P</b>rotein–<b>L</b>ipid <span style="color: red;"><b>i</b></span>nteraction <b>Ca</b>tegorization <b>T</b>ool),that predicts protein-lipid binding abilities based on amino acid sequences. This model utilizes a hybrid framework integrating ESM Cambrian (ESM Team, 2024) and BERT (Devlin et al., 2018).  We also carefully developed training datasets and disease mutation datasets for model training and validation. 
 
-**Overall schematic framework of LPR**:
+**Overall schematic framework of PLiCat**:
 
-![LPR Architecture](visualization/images/PLiCat-Architecture.jpg)
+![PLiCat Architecture](visualization/images/PLiCat-Architecture.jpg)
 
 
 ## OnlineDemo
 ---
 - 📄 **Paper**: [https://...](https://....)  
-- 🤗 **HuggingFace Repository**: [https://huggingface.co/Noora68/lpr-0.4B](https://huggingface.co/Noora68/lpr-0.4B)  
+- 🤗 **HuggingFace Repository**: [https://huggingface.co/Noora68/PLiCat-0.4B](https://huggingface.co/Noora68/PLiCat-0.4B)  
 - 🚀 **Online Demo**: [https://colab.research.google.com/drive/1wGSZsy7KyYoJf2PiXzP4SVLXonl-cWb9?usp=sharing](https://colab.research.google.com/drive/1wGSZsy7KyYoJf2PiXzP4SVLXonl-cWb9?usp=sharing)  
-- 📂 **Datasets**: [https://huggingface.co/datasets/Noora68/lpr-dataset-1.0](https://huggingface.co/datasets/Noora68/lpr-dataset-1.0)  
+- 📂 **Datasets**: [https://huggingface.co/datasets/Noora68/PLiCat-0.1.0](https://huggingface.co/datasets/Noora68/PLiCat-0.1.0)  
 ---
 ---
 
@@ -36,13 +36,14 @@ We developed a multi-label classification model named LPR (lipid binding protein
 **install the latest version**：
 
 ```python
-pip install lpr_model==1.1.1
+pip install plicat_model==0.1.0
 
 ````
 ---
 
 ```python
-from lpr_model import LPR
+```python
+from plicat_model import PLiCat
 import torch
 from torch.nn.utils.rnn import pad_sequence
 from esm.tokenization import EsmSequenceTokenizer
@@ -64,8 +65,8 @@ default_dict = {
     "8": "Saccharolipid (SL)"
 }
 
-# Load pretrained LPR model
-model = LPR.from_pretrained("Noora68/PLiCat-0.4B").to(device)
+# Load pretrained PLiCat model
+model = PLiCat.from_pretrained("Noora68/PLiCat-0.4B").to(device)
 
 # Example protein sequence
 sequence = "MDSNFLKYLSTAPVLFTVWLSFTASFIIEANRFFPDMLYFPM"
@@ -122,8 +123,8 @@ Saccharolipid (SL)       : 0.0000
 ### 1. 📥 Clone the repository
 
 ```bash
-git clone https://github.com/Noora68/Lipid-binding-Protein-Recognition-LPR.git
-cd Lipid-binding-Protein-Recognition-LPR
+git clone https://github.com/Noora68/PLiCat.git
+cd PLiCat
 ```
 ---
 
@@ -131,10 +132,10 @@ cd Lipid-binding-Protein-Recognition-LPR
 
 ```bash
 # Create a new conda environment
-conda create -n lprenv python=3.12
+conda create -n plicat_env python=3.12
 
 # Activate the environment
-conda activate lprenv
+conda activate plicat_env
 
 # Install dependencies
 pip install -r requirements.txt
