@@ -1,11 +1,11 @@
-<h1 style="display: flex; align-items: center; justify-content: center; text-align: center;">
+<h1 style="display: flex; align-items: center; justify-content: center; margin: 0;">
   <!-- 左侧 Logo -->
   <img src="visualization/images/cat_logo.jpg" 
        width="100" height="100" 
        style="margin-right: 15px;"/>
 
-  <!-- 右侧标题整体，两行 -->
-  <div>
+  <!-- 右侧标题（多行文字整体） -->
+  <div style="text-align: left;">
     <div><b>PL<span style="color: red;">i</span>Cat</b></div>
     <div>(<b>P</b>rotein–<b>L</b>ipid 
       <span style="color: red;"><b>i</b></span>nteraction 
@@ -13,6 +13,7 @@
     </div>
   </div>
 </h1>
+
 
 
 
