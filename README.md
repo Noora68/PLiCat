@@ -1,4 +1,4 @@
-| ![logo](visualization/images/cat_logo.jpg) | **PLiCat**  <br/> (*Protein–Lipid interaction Categorization Tool*) |
+| <img src="visualization/images/cat_logo.jpg" width="100" height="100"/>  | **PLiCat**  <br/> (*Protein–Lipid interaction Categorization Tool*) |
 |:------------------------------------------:|:------------------------------------------------------------------|
 
 
