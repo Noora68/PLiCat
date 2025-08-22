@@ -1,5 +1,5 @@
-| <img src="visualization/images/cat_logo.jpg" width="100" height="100"/>  | <h2>PLiCat <br/> (Protein–Lipid interaction Categorization tool) </h2> |
-|:------------------------------------------:|:-----------------------------------------------------------------------------------------------------|
+| <img src="visualization/images/cat_logo.jpg" width="100" height="100"/>  | <h1>PLiCat <br/> (Protein–Lipid interaction Categorization tool) </h1> |
+|:------------------------------------------:|:-----------------------------------------------------------------------|
 
 
 ## Table of Contents
