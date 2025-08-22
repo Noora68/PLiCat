@@ -1,4 +1,4 @@
-<h1 align="center"><img src="visualization/images/cat_logo.jpg width =100 height = 100"/> <b>PL<span style="color: red;">i</span>Cat </b>(<b>P</b>rotein–<b>L</b>ipid <span style="color: red;"><b>i</b></span>nteraction <b>Ca</b>tegorization <b>T</b>ool)</h1>
+<h1 align="center"><img src="visualization/images/cat_logo.jpg" width ="100" height = "100"/> <b>PL<span style="color: red;">i</span>Cat </b>(<b>P</b>rotein–<b>L</b>ipid <span style="color: red;"><b>i</b></span>nteraction <b>Ca</b>tegorization <b>T</b>ool)</h1>
 
 ## Table of Contents
 - [Introduction](#introduction)
