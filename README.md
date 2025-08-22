@@ -1,33 +1,5 @@
-<table style="margin: 0 auto;">
-  <tr>
-    <!-- 左侧单元格：图片 -->
-    <td style="vertical-align: middle; padding-right: 20px;">
-      <img src="visualization/images/cat_logo.jpg" 
-           width="100" height="100" 
-           alt="PLiCat Logo"/> <!-- 添加alt属性提高可访问性 -->
-    </td>
-
-    <!-- 右侧单元格：标题文字 -->
-    <td style="vertical-align: middle; text-align: left;">
-      <div style="line-height: 1.2;"> <!-- 使用div代替h1避免过大的默认边距 -->
-        <span style="font-size: 2em; font-weight: bold;">
-          PL<span style="color: red;">i</span>Cat
-        </span><br/>
-        <span style="font-size: 1.2em;"> <!-- 第二行文字稍小 -->
-          (<b>P</b>rotein–<b>L</b>ipid 
-          <span style="color: red;"><b>i</b></span>nteraction 
-          <b>Ca</b>tegorization <b>T</b>ool)
-        </span>
-      </div>
-    </td>
-  </tr>
-</table>
-    
-
-
-
-
-
+| ![logo](visualization/images/cat_logo.jpg) | **PLiCat**  <br/> (*Protein–Lipid interaction Categorization Tool*) |
+|:------------------------------------------:|:------------------------------------------------------------------|
 
 
 ## Table of Contents
