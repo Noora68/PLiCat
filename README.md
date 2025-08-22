@@ -9,15 +9,16 @@
     <!-- 右侧单元格：标题文字 -->
     <td style="vertical-align: middle; text-align: left;">
       <h1 style="margin: 0;">
-        <div><b>PL<span style="color: red;">i</span>Cat</b></div>
-        <div>(<b>P</b>rotein–<b>L</b>ipid 
+        <span><b>PL<span style="color: red;">i</span>Cat</b></span><br/>
+        <span>(<b>P</b>rotein–<b>L</b>ipid 
           <span style="color: red;"><b>i</b></span>nteraction 
           <b>Ca</b>tegorization <b>T</b>ool)
-        </div>
+        </span>
       </h1>
     </td>
   </tr>
 </table>
+
 
 
 
