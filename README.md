@@ -44,7 +44,6 @@ pip install plicat_model
 ---
 
 ```python
-```python
 from plicat_model import PLiCat
 import torch
 from torch.nn.utils.rnn import pad_sequence
