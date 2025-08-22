@@ -1,26 +1,11 @@
-<table align="center">
-  <tr>
-    <!-- 左侧单元格：图片 -->
-    <td style="vertical-align: middle; padding-right: 15px;">
-      <img src="visualization/images/cat_logo.jpg" 
-           width="100" height="100"/>
-    </td>
 
-    <!-- 右侧单元格：标题文字 -->
-    <td style="vertical-align: middle; text-align: left;">
-      <h1 style="margin: 0;">
-        <span><b>PL<span style="color: red;">i</span>Cat</b></span><br/>
-        <span>(<b>P</b>rotein–<b>L</b>ipid 
-          <span style="color: red;"><b>i</b></span>nteraction 
-          <b>Ca</b>tegorization <b>T</b>ool)
-        </span>
-      </h1>
-    </td>
-  </tr>
-</table>
-
-
-
+<h1 style="margin: 0;">
+<span><b>PL<span style="color: red;">i</span>Cat</b></span><br/>
+<span>(<b>P</b>rotein–<b>L</b>ipid 
+  <span style="color: red;"><b>i</b></span>nteraction 
+  <b>Ca</b>tegorization <b>T</b>ool)
+</span>
+</h1>
 
 
 
