@@ -38,7 +38,7 @@ We developed a multi-label classification model named <b>PLiCat </b>(<b>P</b>rot
 **install the latest version**：
 
 ```python
-pip install plicat_model==0.1.0
+pip install plicat_model
 
 ````
 ---
@@ -175,7 +175,7 @@ If you find this repo useful, please cite:
 ```bibtex
 @article{
   your2025paper,
-  title={Deciphering the code of lipid binding by large language model},
+  title={Decoding protein-lipid interaction by large language model},
   author={Feitong Dong,},
   journal={Bioinformatics},
   year={2025}
