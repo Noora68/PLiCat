@@ -21,7 +21,7 @@ We developed a multi-label classification model named <b>PL<span style="color: r
 
 **Overall schematic framework of PLiCat**:
 
-![PLiCat Architecture](visualization/images/PLiCat-Architecture.jpg)
+![PLiCat Architecture](visualization/images/Plicat-Architecture.jpg)
 
 
 ## OnlineDemo
