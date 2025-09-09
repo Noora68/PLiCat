@@ -4,10 +4,10 @@
 
 ## Table of Contents
 - [Introduction](#introduction)
-- [OnlineResources](#OnlineResources)
+- [Online Resources](#Online Resources)
 - [Usage](#usage)
 - [Installation](#installation)
-- [Citing this work](#Citingthiswork)
+- [Citing this work](#Citing this work)
 - [License](#license)
 
 
@@ -24,7 +24,7 @@ We developed a multi-label classification model named <b>PLiCat </b>(<b>P</b>rot
 ![PLiCat Architecture](visualization/images/Plicat-Architecture.jpg)
 
 
-## Online resources
+## Online Resources
 ---
 - 📄 **Paper**: [https://...](https://....)  
 - 🤗 **HuggingFace Repository**: [https://huggingface.co/Noora68/PLiCat-0.4B](https://huggingface.co/Noora68/PLiCat-0.4B)  
