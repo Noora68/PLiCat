@@ -4,10 +4,10 @@
 
 ## Table of Contents
 - [Introduction](#introduction)
-- [Online Resources](#onlineresources)
+- [OnlineResources](#onlineresources)
 - [Usage](#usage)
 - [Installation](#installation)
-- [Citing this work](#citingthiswork)
+- [Citation](#citation)
 - [License](#license)
 
 
@@ -24,7 +24,7 @@ We developed a multi-label classification model named <b>PLiCat </b>(<b>P</b>rot
 ![PLiCat Architecture](visualization/images/Plicat-Architecture.jpg)
 
 
-## Online Resources
+## OnlineResources
 ---
 - 📄 **Paper**: [https://...](https://....)  
 - 🤗 **HuggingFace Repository**: [https://huggingface.co/Noora68/PLiCat-0.4B](https://huggingface.co/Noora68/PLiCat-0.4B)  
@@ -167,7 +167,7 @@ python single_model_eval.py
 
 ---
 
-## Citing this work
+## Citation
 
 If you use the code or data in this package, please cite:
 
