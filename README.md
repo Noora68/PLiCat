@@ -7,7 +7,7 @@
 - [OnlineDemo](#onlinedemo)
 - [Usage](#usage)
 - [Installation](#installation)
-- [Citation](#citation)
+- [Citing this work](#Citing this work)
 - [License](#license)
 
 
@@ -167,20 +167,25 @@ python single_model_eval.py
 
 ---
 
-## Citation
+## Citing this work
 
-If you find this repo useful, please cite:
+If you use the code or data in this package, please cite:
 
 ```bibtex
-@article{
-  paper = {},
-  title={PLiCat:Decoding protein-lipid interactions by large language model},
-  author={Feitong Dong,Jingrou Wu},
-  journal={Bioinformatics},
-  year={2025}
+@Article{PLiCat2025,
+  author  = {Feitong Dong,Jingrou Wu},
+  journal = {Bioinformatics},
+  title   = {PLiCat:Decoding protein-lipid interactions by large language model},
+  year    = {2025},
+  volume  = { },
+  number  = { },
+  pages   = { -- },
+  doi     = { }
+  URL     = {https://www.biorxiv.org/??},
+  eprint  = {https://www.biorxiv.org/ ??.pdf},
 }
-```
 
+```
 ---
 
 ## License
