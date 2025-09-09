@@ -174,7 +174,7 @@ If you use the code or data in this package, please cite:
 ```bibtex
 @Article{PLiCat2025,
   author  = {Feitong Dong,Jingrou Wu},
-  journal = {Bioinformatics},
+  journal = { },
   title   = {PLiCat:Decoding protein-lipid interactions by large language model},
   year    = {2025},
   volume  = { },
