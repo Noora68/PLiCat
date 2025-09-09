@@ -4,10 +4,10 @@
 
 ## Table of Contents
 - [Introduction](#introduction)
-- [Online resources](#Online resources)
+- [OnlineResources](#OnlineResources)
 - [Usage](#usage)
 - [Installation](#installation)
-- [Citing this work](#Citing this work)
+- [Citing this work](#Citingthiswork)
 - [License](#license)
 
 
