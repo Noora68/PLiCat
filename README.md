@@ -31,7 +31,6 @@ We developed a multi-label classification model named <b>PLiCat </b>(<b>P</b>rot
 - 🚀 **Online Demo**: [https://colab.research.google.com/drive/1wGSZsy7KyYoJf2PiXzP4SVLXonl-cWb9?usp=sharing](https://colab.research.google.com/drive/1wGSZsy7KyYoJf2PiXzP4SVLXonl-cWb9?usp=sharing)  
 - 📂 **Datasets**: [https://huggingface.co/datasets/Noora68/PLiCat-0.1.0](https://huggingface.co/datasets/Noora68/PLiCat-0.1.0)  
 ---
----
 
 ## Usage
 
