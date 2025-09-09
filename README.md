@@ -173,9 +173,9 @@ If you find this repo useful, please cite:
 
 ```bibtex
 @article{
-  your2025paper,
-  title={Decoding protein-lipid interaction by large language model},
-  author={Feitong Dong,},
+  paper = {},
+  title={PLiCat:Decoding protein-lipid interactions by large language model},
+  author={Feitong Dong,Jingrou Wu},
   journal={Bioinformatics},
   year={2025}
 }
