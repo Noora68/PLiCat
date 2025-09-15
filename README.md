@@ -179,9 +179,9 @@ If you use the code or data in this package, please cite:
   volume  = { },
   number  = { },
   pages   = { -- },
-  doi     = { }
-  URL     = {https://www.biorxiv.org/??},
-  eprint  = {https://www.biorxiv.org/ ??.pdf},
+  doi     = {doi: https://doi.org/10.1101/2025.09.09.675043}
+  URL     = {https://www.biorxiv.org/content/10.1101/2025.09.09.675043v1},
+  eprint  = {https://www.biorxiv.org/content/10.1101/2025.09.09.675043v1.full.pdf},
 }
 
 ```
