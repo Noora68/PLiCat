@@ -26,7 +26,7 @@ We developed a multi-label classification model named <b>PLiCat </b>(<b>P</b>rot
 
 ## OnlineResources
 ---
-- 📄 **Paper**: [https://www.biorxiv.org/content/10.1101/2025.09.09.675043v1](https://www.biorxiv.org/content/10.1101/2025.09.09.675043v1)  
+- 📄 **Paper**: [https://academic.oup.com/bib/article/26/6/bbaf665/8377155](https://academic.oup.com/bib/article/26/6/bbaf665/8377155)  
 - 🤗 **HuggingFace Repository**: [https://huggingface.co/Noora68/PLiCat-0.4B](https://huggingface.co/Noora68/PLiCat-0.4B)  
 - 🚀 **Online Demo**: [https://colab.research.google.com/drive/1wGSZsy7KyYoJf2PiXzP4SVLXonl-cWb9?usp=sharing](https://colab.research.google.com/drive/1wGSZsy7KyYoJf2PiXzP4SVLXonl-cWb9?usp=sharing)  
 - 📂 **Datasets**: [https://huggingface.co/datasets/Noora68/PLiCat-0.1.0](https://huggingface.co/datasets/Noora68/PLiCat-0.1.0)  
